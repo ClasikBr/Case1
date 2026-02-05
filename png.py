@@ -44,6 +44,6 @@ def center_cube():
     tri((100,0),(100,50),(50,0),'lightblue')
     tri((50,50),(75,25),(25,25),'pink')
     square(75,75,35,45,'orange')
-    rhomb(0,0,50,35,'green')
+    parallelogram(0,0,50,35,'green')
 center_cube()
 t.done()
