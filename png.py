@@ -22,7 +22,7 @@ def square(x,y,a,angle,color):
         t.right(90)
         t.fd(a)
     t.end_fill()
-def rhomb (x,y,a,b,color):
+def parallelogram (x,y,a,b,color):
     t.up()
     t.goto(x,y)
     t.pd()
