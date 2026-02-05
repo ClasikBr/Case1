@@ -1,7 +1,7 @@
 import turtle as t
 screen=t.Screen()
 screen.setup(1000,800)
-t.speed(0)
+t.tracer(n=5,delay=0)
 def tri(a,b,c,color):
     t.pu()
     t.goto(a[0],a[1])
@@ -22,11 +22,11 @@ def square(x,y,a,angle,color):
         t.right(90)
         t.fd(a)
     t.end_fill()
-def parallelogram (x,y,a,b,color):
+def parallelogram (x,y,a,b,angle,color):
     t.up()
     t.goto(x,y)
     t.pd()
-    t.setheading(0)
+    t.setheading(angle)
     t.fillcolor(color)
     t.begin_fill()
     t.fd(a)
@@ -44,6 +44,15 @@ def center_cube():
     tri((100,0),(100,50),(50,0),'lightblue')
     tri((50,50),(75,25),(25,25),'pink')
     square(75,75,35,45,'orange')
-    parallelogram(0,0,50,35,'green')
+    parallelogram(0,0,50,35,0,'green')
+def cat():
+    parallelogram(150,50,25,20,300,'lightblue')
+    tri((175,25),(200,50),(200,0),'orange')
+    tri((205,50),(230,25),(205,0),'red')
+    square(200,80,20,45,'lightgreen')
+    tri((185,65),(185,90),(200,80),'orange')
+    tri((215,65),(215,90),(200,80),'purple')
 center_cube()
+cat()
+t.goto(500,500)
 t.done()
