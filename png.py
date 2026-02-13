@@ -45,7 +45,6 @@ def romb(x, y, side, angle_of_romb, start_angle, color):
     t.pendown()
     t.fillcolor(color)
     t.begin_fill()
-
     t.left((180-angle_of_romb)/2)
     t.forward(side)
     t.left(angle_of_romb)
@@ -63,9 +62,7 @@ def trapeze(x, y, low_osn, up_osn, side, start_angle, color):
     t.goto(x,y)
     t.pendown()
     t.fillcolor(color)
-    t.speed(1)
     t.begin_fill()
-
     t.forward(low_osn)
     t.left(180 - angle)
     t.forward(side)
@@ -90,13 +87,13 @@ def rectangle (x,y,a,b,angle,color):
     t.fd(b)
     t.end_fill()
 def ship():
-    trapeze(0,200,60,120,40, 0, 'brown')
-    rectangle(28,226.45,4,60,0,'black')
-    tri((32,286.45), (55,276.45), (32, 266.45), 'indigo')
-    tri((32,266.45), (60,256.45), (32, 246.45), 'indigo')
-    rectangle(32,205, 30,5,0,'red')
-    rectangle(32,210, 30,5,0,'blue')
-    rectangle(32,215, 30,5,0,'white')
+    trapeze(20,150,60,120,40, 0, 'brown')
+    rectangle(48,176.45,4,60,0,'black')
+    tri((52,236.45), (75,226.45), (52, 216.45), 'indigo')
+    tri((52,216.45), (80,206.45), (52, 196.45), 'indigo')
+    rectangle(52,155, 30,5,0,'red')
+    rectangle(52,160, 30,5,0,'blue')
+    rectangle(52,165, 30,5,0,'white')
 def center_cube():
     tri((0,0),(0,100),(50,50),'yellow')
     tri((0,100),(100,100),(50,50),'red')
