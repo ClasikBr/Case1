@@ -3,6 +3,7 @@ import math
 screen=t.Screen()
 screen.setup(1000,800)
 t.tracer(n=5,delay=0)
+t.ht()
 def flower(x, y, a, color):
     t.pu()
     t.goto(x,y)
@@ -240,5 +241,4 @@ center_cube()
 cat()
 ship()
 squirrel()
-t.goto(500,500)
 t.done()
