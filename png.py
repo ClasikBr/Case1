@@ -1,56 +1,69 @@
-import turtle as t
 import math
-screen=t.Screen()
-screen.setup(1000,800)
-t.tracer(n=5,delay=0)
-t.ht()
-def flower(x, y, a, color):
+import turtle as t
+
+def setup_screen() -> None:
+    """Настройка экрана и черепахи."""
+    screen = t.Screen()
+    screen.setup(1000, 800)
+    t.tracer(n=5, delay=0)
+    t.ht()
+
+
+def flower(x: float, y: float, size: float, color: str) -> None:
+    """Нарисовать цветок в точке (x, y)."""
     t.pu()
-    t.goto(x,y)
+    t.goto(x, y)
     t.pd()
     t.seth(120)
     t.fillcolor(color)
     t.begin_fill()
-    t.fd(a)
+    t.fd(size)
     t.rt(30)
-    t.fd(2 * a)
+    t.fd(2 * size)
     t.rt(150)
-    t.fd(a * 0.5)
+    t.fd(size * 0.5)
     t.lt(120)
-    t.fd(a * 0.5)
+    t.fd(size * 0.5)
     t.rt(120)
-    t.fd(a * 0.5)
+    t.fd(size * 0.5)
     t.lt(120)
-    t.fd(a * 0.5)
+    t.fd(size * 0.5)
     t.rt(150)
-    t.fd(2 * a)
+    t.fd(2 * size)
     t.rt(30)
-    t.fd(a)
+    t.fd(size)
     t.dot(1)
     t.end_fill()
-def tri(a,b,c,color):
+
+def triangle(a: tuple, b: tuple, c: tuple, color: str) -> None:
+    """Нарисовать заполненный треугольник по трём вершинам."""
     t.pu()
-    t.goto(a[0],a[1])
+    t.goto(a[0], a[1])
     t.pd()
     t.fillcolor(color)
     t.begin_fill()
-    for point in [a,b,c,a]:
-        t.goto(point[0],point[1])
+    for point in [a, b, c, a]:
+        t.goto(point[0], point[1])
     t.end_fill()
-def square(x,y,a,angle,color):
+
+def square(x: float, y: float, side: float, angle: float, color: str) -> None:
+    """Нарисовать заполненный квадрат со стороной side, началом в (x, y)."""
     t.pu()
-    t.goto(x,y)
-    t.setheading(angle)
+    t.goto(x, y)
+    t.seth(angle)
     t.pd()
     t.fillcolor(color)
     t.begin_fill()
-    for point in range(4):
-        t.right(90)
-        t.fd(a)
+    for _ in range(4):
+        t.rt(90)
+        t.fd(side)
     t.end_fill()
-def parallelogram (x,y,a,b,angle,color):
+
+def parallelogram(x: float, y: float, a: float, b: float, angle: float,
+                  color: str) -> None:
+    """Нарисовать параллелограмм с началом в (x, y)."""
     t.up()
-    t.goto(x,y)
+    t.goto(x, y)
     t.pd()
     t.setheading(angle)
     t.fillcolor(color)
@@ -63,86 +76,83 @@ def parallelogram (x,y,a,b,angle,color):
     t.left(45)
     t.fd(b)
     t.end_fill()
-def romb(x, y, side, angle_of_romb, start_angle, color):
+
+def rhomb(x: float, y: float, side: float, angle_of_rhomb: float,
+          start_angle: float, color: str) -> None:
+    """Нарисовать ромб."""
     t.setheading(start_angle)
     t.penup()
-    t.goto(x,y)
+    t.goto(x, y)
     t.pendown()
     t.fillcolor(color)
     t.begin_fill()
-    t.left((180-angle_of_romb)/2)
+    t.left((180 - angle_of_rhomb) / 2)
     t.forward(side)
-    t.left(angle_of_romb)
+    t.left(angle_of_rhomb)
     t.forward(side)
-    t.left(180-angle_of_romb)
+    t.left(180 - angle_of_rhomb)
     t.forward(side)
-    t.left(angle_of_romb)
+    t.left(angle_of_rhomb)
     t.forward(side)
     t.end_fill()
-def trapeze(x, y, low_osn, up_osn, side, start_angle, color):
-    angle_radians = math.acos((low_osn - up_osn)/(2*side))
+
+def trapezoid(x: float, y: float, low_base: float, up_base: float, side: float,
+              start_angle: float, color: str) -> None:
+    """Нарисовать трапецию по основаниям и боковой стороне."""
+    # вычисляем угол при основании по теореме косинусов
+    angle_radians = math.acos((low_base - up_base) / (2 * side))
     angle = math.degrees(angle_radians)
-    t.setheading(start_angle)
-    t.penup()
-    t.goto(x,y)
-    t.pendown()
-    t.fillcolor(color)
-    t.begin_fill()
-    t.forward(low_osn)
-    t.left(180 - angle)
-    t.forward(side)
-    t.left(angle)
-    t.forward(up_osn)
-    t.left(angle)
-    t.forward(side)
-    t.end_fill()
-def rectangle (x,y,a,b,angle,color):
-    t.setheading(angle)
-    t.up()
-    t.goto(x,y)
-    t.pd()
-    t.fillcolor(color)
-    t.begin_fill()
-    t.fd(a)
-    t.left(90)
-    t.fd(b)
-    t.left(90)
-    t.fd(a)
-    t.left(90)
-    t.fd(b)
-    t.end_fill()
-def Jewish_star(x, y, a, color):
+    t.seth(start_angle)
     t.pu()
     t.goto(x, y)
     t.pd()
-    t.setheading(0)
+    t.fillcolor(color)
+    t.begin_fill()
+    t.fd(low_base)
+    t.lt(180 - angle)
+    t.fd(side)
+    t.lt(angle)
+    t.fd(up_base)
+    t.lt(angle)
+    t.fd(side)
+    t.end_fill()
+
+def rectangle(x: float, y: float, a: float, b: float, angle: float,
+              color: str) -> None:
+    """Нарисовать прямоугольник со сторонами a и b."""
+    t.seth(angle)
+    t.up()
+    t.goto(x, y)
+    t.pd()
     t.fillcolor(color)
     t.begin_fill()
     t.fd(a)
-    t.left(60)
+    t.left(90)
+    t.fd(b)
+    t.left(90)
     t.fd(a)
-    t.right(120)
-    t.fd(a)
-    t.left(60)
-    t.fd(a)
-    t.right(120)
-    t.fd(a)
-    t.left(60)
-    t.fd(a)
-    t.right(120)
-    t.fd(a)
-    t.left(60)
-    t.fd(a)
-    t.right(120)
-    t.fd(a)
-    t.left(60)
-    t.fd(a)
-    t.right(120)
-    t.fd(a)
-    t.left(60)
-    t.fd(a)
+    t.left(90)
+    t.fd(b)
     t.end_fill()
-def piece_of_snowflake(x, y, a, b, angle, color):
+
+def jewish_star(x: float, y: float, side: float, color: str) -> None:
+    """Нарисовать звезду Давида (многоугольник повторяющийся)."""
+    t.pu()
+    t.goto(x, y)
+    t.pd()
+    t.seth(0)
+    t.fillcolor(color)
+    t.begin_fill()
+    for _ in range(8):
+        t.fd(side)
+        t.lt(60)
+        t.fd(side)
+        t.rt(120)
+    t.end_fill()
+
+def snowflake_piece(x: float, y: float, a: float, b: float, angle: float,
+                    color: str) -> None:
+    """Одна веточка снежинки."""
     t.pu()
     t.goto(x, y)
     t.pd()
@@ -165,80 +175,100 @@ def piece_of_snowflake(x, y, a, b, angle, color):
     t.right(30)
     t.fd(a)
     t.circle(5, 180)
-def ship():
-    trapeze(20,150,60,120,40, 0, 'brown')
-    rectangle(48,176.45,4,60,0,'black')
-    tri((52,236.45), (75,226.45), (52, 216.45), 'indigo')
-    tri((52,216.45), (80,206.45), (52, 196.45), 'indigo')
-    rectangle(52,155, 30,5,0,'red')
-    rectangle(52,160, 30,5,0,'blue')
-    rectangle(52,165, 30,5,0,'white')
-def squirrel():
-    rectangle(180, 160, 30, 60, 0, 'darkorange')
-    tri((185, 160), (180, 145), (190,145), 'black')
-    tri((205, 160), (200,145), (210,145), 'black')
-    rectangle(185, 170,20,40,0,'wheat')
-    square(215, 260, 40, 0, 'gold')
-    tri((190,180), (185, 200), (195, 200), 'orange')
-    tri((200,180), (195, 200), (205, 200), 'orange')
-    rectangle(189, 230, 6,10, 0, 'white')
-    rectangle(195, 230, 6,10, 0, 'white')
-    square(185, 250, 4, 0, 'black')
-    square(210, 250, 4, 0, 'black')
-    tri((175,260), (185, 260), (172, 280), 'orange')
-    tri((205,260), (215, 260), (218, 280), 'orange')
-    parallelogram(180, 170, 20, 30, 90, 'coral')
-    square(170,276, 5, 180, 'black' )
-    square(215,276, 5, 180, 'black')
-    tri((195,240), (190, 245), (200, 245), 'crimson')
-def center_cube():
-    tri((0,0),(0,100),(50,50),'yellow')
-    tri((0,100),(100,100),(50,50),'red')
-    tri((100,100),(100,50),(75,75),'purple')
-    tri((100,0),(100,50),(50,0),'lightblue')
-    tri((50,50),(75,25),(25,25),'pink')
-    square(75,75,35,45,'orange')
-    parallelogram(0,0,50,35,0,'green')
-def cat():
-    parallelogram(150,50,25,20,300,'lightblue')
-    tri((175,25),(200,50),(200,0),'orange')
-    tri((205,50),(230,25),(205,0),'red')
-    square(200,80,20,45,'lightgreen')
-    tri((185,65),(185,90),(200,80),'orange')
-    tri((215,65),(215,90),(200,80),'purple')
-def Christmas_tree():
-    Jewish_star(-100, 120, 10, 'yellow')
-    rectangle(-93, 0, 15, 30, 0, 'brown')
-    trapeze(-120, 30, 70, 40, 20, 0, 'green')
-    trapeze(-120, 43, 70, 40, 20, 0, 'green')
-    trapeze(-120, 56, 70, 40, 20, 0, 'green')
-    tri((-105, 69), (-85, 90), (-65, 69),  'green')
-def snowflake():
-    piece_of_snowflake(-80, 190, 30, 10, 0, 'white')
-    piece_of_snowflake(-80, 190, 30, 10, 60, 'white')
-    piece_of_snowflake(-80, 190, 30, 10, 120, 'white')
-    piece_of_snowflake(-80, 190, 30, 10, 180, 'white')
-    piece_of_snowflake(-80, 190, 30, 10, 240, 'white')
-    piece_of_snowflake(-80, 190, 30, 10, 300, 'white')
-def peony():
-    flower(-190, 65, 20, 'pink')
-    rectangle(-192, 0, 4, 70, 0, 'green')
-    parallelogram(-192, 20, 20, 30, 120, 'green')
-    parallelogram(-188, 30, 30, 20, 20, 'green')
-def swan():
-    tri((-180, 170), (-200, 190), (-160, 190), 'red')
-    tri((-200, 190), (-200, 160), (-170,160), 'yellow')
-    tri((-200, 190), (-200, 160), (-215, 175), 'blue')
-    tri((-215, 175), (-215, 195,), (-205, 185), 'pink')
-    square(-205, 185, 14, 225, 'green')
-    parallelogram(-195, 195, 20, 14, 90, 'blue')
-    tri((-205, 225), (-205, 210), (-220, 210), 'orange')
-swan()
-peony()
-snowflake()
-Christmas_tree()
-center_cube()
-cat()
-ship()
-squirrel()
-t.done()
+    t.end_fill()
+
+def ship() -> None:
+    """Составной объект корабля."""
+    trapezoid(20, 150, 60, 120, 40, 0, "brown")
+    rectangle(48, 176.45, 4, 60, 0, "black")
+    triangle((52, 236.45), (75, 226.45), (52, 216.45), "indigo")
+    triangle((52, 216.45), (80, 206.45), (52, 196.45), "indigo")
+    rectangle(52, 155, 30, 5, 0, "red")
+    rectangle(52, 160, 30, 5, 0, "blue")
+    rectangle(52, 165, 30, 5, 0, "white")
+
+def squirrel() -> None:
+    """Составной объект белки."""
+    rectangle(180, 160, 30, 60, 0, "darkorange")
+    triangle((185, 160), (180, 145), (190, 145), "black")
+    triangle((205, 160), (200, 145), (210, 145), "black")
+    rectangle(185, 170, 20, 40, 0, "wheat")
+    square(215, 260, 40, 0, "gold")
+    triangle((190, 180), (185, 200), (195, 200), "orange")
+    triangle((200, 180), (195, 200), (205, 200), "orange")
+    rectangle(189, 230, 6, 10, 0, "white")
+    rectangle(195, 230, 6, 10, 0, "white")
+    square(185, 250, 4, 0, "black")
+    square(210, 250, 4, 0, "black")
+    triangle((175, 260), (185, 260), (172, 280), "orange")
+    triangle((205, 260), (215, 260), (218, 280), "orange")
+    parallelogram(180, 170, 20, 30, 90, "coral")
+    square(170, 276, 5, 180, "black")
+    square(215, 276, 5, 180, "black")
+    triangle((195, 240), (190, 245), (200, 245), "crimson")
+
+def center_cube() -> None:
+    """Центральный куб из треугольников и квадратов."""
+    triangle((0, 0), (0, 100), (50, 50), "yellow")
+    triangle((0, 100), (100, 100), (50, 50), "red")
+    triangle((100, 100), (100, 50), (75, 75), "purple")
+    triangle((100, 0), (100, 50), (50, 0), "lightblue")
+    triangle((50, 50), (75, 25), (25, 25), "pink")
+    square(75, 75, 35, 45, "orange")
+    parallelogram(0, 0, 50, 35, 0, "green")
+
+def cat() -> None:
+    """Составной объект кота."""
+    parallelogram(150, 50, 25, 20, 300, "lightblue")
+    triangle((175, 25), (200, 50), (200, 0), "orange")
+    triangle((205, 50), (230, 25), (205, 0), "red")
+    square(200, 80, 20, 45, "lightgreen")
+    triangle((185, 65), (185, 90), (200, 80), "orange")
+    triangle((215, 65), (215, 90), (200, 80), "purple")
+
+def christmas_tree() -> None:
+    """Нарисовать рождественскую ёлку."""
+    jewish_star(-100, 120, 10, "yellow")
+    rectangle(-93, 0, 15, 30, 0, "brown")
+    trapezoid(-120, 30, 70, 40, 20, 0, "green")
+    trapezoid(-120, 43, 70, 40, 20, 0, "green")
+    trapezoid(-120, 56, 70, 40, 20, 0, "green")
+    triangle((-105, 69), (-85, 90), (-65, 69), "green")
+
+def snowflake() -> None:
+    """Полная снежинка из шести веточек."""
+    for angle in range(0, 360, 60):
+        snowflake_piece(-80, 190, 30, 10, angle, "white")
+
+def peony() -> None:
+    """Пион."""
+    flower(-190, 65, 20, "pink")
+    rectangle(-192, 0, 4, 70, 0, "green")
+    parallelogram(-192, 20, 20, 30, 120, "green")
+    parallelogram(-188, 30, 30, 20, 20, "green")
+
+def swan() -> None:
+    """Лебедь (составной объект)."""
+    triangle((-180, 170), (-200, 190), (-160, 190), "red")
+    triangle((-200, 190), (-200, 160), (-170, 160), "yellow")
+    triangle((-200, 190), (-200, 160), (-215, 175), "blue")
+    triangle((-215, 175), (-215, 195), (-205, 185), "pink")
+    square(-205, 185, 14, 225, "green")
+    parallelogram(-195, 195, 20, 14, 90, "blue")
+    triangle((-205, 225), (-205, 210), (-220, 210), "orange")
+
+def main() -> None:
+    """Запуск всех фигур."""
+    setup_screen()
+    swan()
+    peony()
+    snowflake()
+    christmas_tree()
+    center_cube()
+    cat()
+    ship()
+    squirrel()
+    t.done()
+
+if __name__ == "__main__":
+    main()
