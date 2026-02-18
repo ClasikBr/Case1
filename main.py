@@ -10,7 +10,7 @@ def setup_screen() -> None:
 
 
 def flower(x: float, y: float, size: float, color: str) -> None:
-    """Нарисовать цветок"""
+    """Draw flower"""
     t.pu()
     t.goto(x, y)
     t.pd()
