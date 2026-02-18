@@ -8,6 +8,7 @@ def setup_screen() -> None:
     t.tracer(n=5, delay=0)
     t.ht()
 
+
 def flower(x: float, y: float, size: float, color: str) -> None:
     """Нарисовать цветок в точке (x, y)."""
     t.pu()
@@ -34,6 +35,7 @@ def flower(x: float, y: float, size: float, color: str) -> None:
     t.dot(1)
     t.end_fill()
 
+
 def triangle(a: tuple, b: tuple, c: tuple, color: str) -> None:
     """Нарисовать заполненный треугольник по трём вершинам."""
     t.pu()
@@ -44,6 +46,7 @@ def triangle(a: tuple, b: tuple, c: tuple, color: str) -> None:
     for point in [a, b, c, a]:
         t.goto(point[0], point[1])
     t.end_fill()
+
 
 def square(x: float, y: float, side: float, angle: float, color: str) -> None:
     """Нарисовать заполненный квадрат со стороной side, началом в (x, y)."""
@@ -57,6 +60,7 @@ def square(x: float, y: float, side: float, angle: float, color: str) -> None:
         t.rt(90)
         t.fd(side)
     t.end_fill()
+
 
 def parallelogram(x: float, y: float, a: float, b: float, angle: float,
                   color: str) -> None:
@@ -76,6 +80,7 @@ def parallelogram(x: float, y: float, a: float, b: float, angle: float,
     t.fd(b)
     t.end_fill()
 
+
 def rhomb(x: float, y: float, side: float, angle_of_rhomb: float,
           start_angle: float, color: str) -> None:
     """Нарисовать ромб."""
@@ -94,6 +99,7 @@ def rhomb(x: float, y: float, side: float, angle_of_rhomb: float,
     t.lt(angle_of_rhomb)
     t.fd(side)
     t.end_fill()
+
 
 def trapezoid(x: float, y: float, low_base: float, up_base: float, side: float,
               start_angle: float, color: str) -> None:
@@ -116,6 +122,7 @@ def trapezoid(x: float, y: float, low_base: float, up_base: float, side: float,
     t.fd(side)
     t.end_fill()
 
+
 def rectangle(x: float, y: float, a: float, b: float, angle: float,
               color: str) -> None:
     """Нарисовать прямоугольник со сторонами a и b."""
@@ -134,6 +141,7 @@ def rectangle(x: float, y: float, a: float, b: float, angle: float,
     t.fd(b)
     t.end_fill()
 
+
 def jewish_star(x: float, y: float, side: float, color: str) -> None:
     """Нарисовать звезду Давида (многоугольник повторяющийся)."""
     t.pu()
@@ -148,6 +156,7 @@ def jewish_star(x: float, y: float, side: float, color: str) -> None:
         t.fd(side)
         t.rt(120)
     t.end_fill()
+
 
 def snowflake_piece(x: float, y: float, a: float, b: float, angle: float,
                     color: str) -> None:
@@ -176,6 +185,7 @@ def snowflake_piece(x: float, y: float, a: float, b: float, angle: float,
     t.circle(5, 180)
     t.end_fill()
 
+
 def ship() -> None:
     """Составной объект корабля."""
     trapezoid(20, 150, 60, 120, 40, 0, "brown")
@@ -185,6 +195,7 @@ def ship() -> None:
     rectangle(52, 155, 30, 5, 0, "red")
     rectangle(52, 160, 30, 5, 0, "blue")
     rectangle(52, 165, 30, 5, 0, "white")
+
 
 def squirrel() -> None:
     """Составной объект белки."""
@@ -206,6 +217,7 @@ def squirrel() -> None:
     square(215, 276, 5, 180, "black")
     triangle((195, 240), (190, 245), (200, 245), "crimson")
 
+
 def center_cube() -> None:
     """Центральный куб из треугольников и квадратов."""
     triangle((0, 0), (0, 100), (50, 50), "yellow")
@@ -216,6 +228,7 @@ def center_cube() -> None:
     square(75, 75, 35, 45, "orange")
     parallelogram(0, 0, 50, 35, 0, "green")
 
+
 def cat() -> None:
     """Составной объект кота."""
     parallelogram(150, 50, 25, 20, 300, "lightblue")
@@ -224,6 +237,7 @@ def cat() -> None:
     square(200, 80, 20, 45, "lightgreen")
     triangle((185, 65), (185, 90), (200, 80), "orange")
     triangle((215, 65), (215, 90), (200, 80), "purple")
+
 
 def christmas_tree() -> None:
     """Нарисовать рождественскую ёлку."""
@@ -234,10 +248,12 @@ def christmas_tree() -> None:
     trapezoid(-120, 56, 70, 40, 20, 0, "green")
     triangle((-105, 69), (-85, 90), (-65, 69), "green")
 
+
 def snowflake() -> None:
     """Полная снежинка из шести веточек."""
     for angle in range(0, 360, 60):
         snowflake_piece(-80, 190, 30, 10, angle, "white")
+
 
 def peony() -> None:
     """Пион."""
@@ -245,6 +261,7 @@ def peony() -> None:
     rectangle(-192, 0, 4, 70, 0, "green")
     parallelogram(-192, 20, 20, 30, 120, "green")
     parallelogram(-188, 30, 30, 20, 20, "green")
+
 
 def swan() -> None:
     """Лебедь (составной объект)."""
@@ -255,6 +272,7 @@ def swan() -> None:
     square(-205, 185, 14, 225, "green")
     parallelogram(-195, 195, 20, 14, 90, "blue")
     triangle((-205, 225), (-205, 210), (-220, 210), "orange")
+
 
 def main() -> None:
     """Запуск всех фигур."""
@@ -268,6 +286,7 @@ def main() -> None:
     ship()
     squirrel()
     t.done()
+
 
 if __name__ == "__main__":
     main()
